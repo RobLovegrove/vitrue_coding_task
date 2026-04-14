@@ -4,7 +4,17 @@
 
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">{{ error }}</div>
-    <pre v-else>{{ employees }}</pre>
+    <div v-else>
+      <div v-for="employee in employees" :key="employee.id" class="employee">
+        <h2>{{ employee.name }}</h2>
+        <p>{{ employee.department }} — {{ employee.riskLevel }} risk</p>
+        <ul>
+          <li v-for="suggestion in employee.suggestions" :key="suggestion.id">
+            {{ suggestion.description }} — <strong>{{ suggestion.status }}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 

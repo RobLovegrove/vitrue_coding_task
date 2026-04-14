@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const store = require('../../data/store');
+const store = require('../data/store');
 
 const VALID_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
 

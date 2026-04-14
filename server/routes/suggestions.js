@@ -6,7 +6,7 @@ const VALID_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
 
 router.get('/', (req, res) => {
     try {
-        let suggestions = store.getAll();
+        let suggestions = store.getAllSuggestions();
 
         if (req.query.status) {
             suggestions = suggestions.filter(s => s.status === req.query.status);

@@ -5,15 +5,11 @@
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
-      <div v-for="employee in employees" :key="employee.id" class="employee">
-        <h2>{{ employee.name }}</h2>
-        <p>{{ employee.department }} — {{ employee.riskLevel }} risk</p>
-        <ul>
-          <li v-for="suggestion in employee.suggestions" :key="suggestion.id">
-            {{ suggestion.description }} — <strong>{{ suggestion.status }}</strong>
-          </li>
-        </ul>
-      </div>
+      <EmployeeCard
+        v-for="employee in employees"
+        :key="employee.id"
+        :employee="employee"
+      />
     </div>
   </div>
 </template>
@@ -21,6 +17,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { getEmployees } from '@/services/api'
+import EmployeeCard from '@/components/EmployeeCard.vue'
 
 const employees = ref([])
 const loading = ref(true)

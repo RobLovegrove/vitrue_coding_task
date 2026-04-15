@@ -14,6 +14,8 @@
         v-for="employee in filteredEmployees"
         :key="employee.id"
         :employee="employee"
+        :updatingSuggestionId="updatingSuggestionId"
+        :updateErrorsById="updateErrorsById"
         @update:status="handleStatusUpdate"
       />
     </div>
@@ -31,6 +33,8 @@ const loading = ref(true)
 const error = ref(null)
 const selectedStatus = ref('all')
 const statuses = ['all', 'pending', 'in_progress', 'completed', 'overdue']
+const updatingSuggestionId = ref(null)
+const updateErrorsById = ref({})
 
 onMounted(async () => {
   try {
@@ -54,6 +58,14 @@ const filteredEmployees = computed(() => {
 })
 
 const handleStatusUpdate = async ({ suggestionId, status }) => {
+
+  updateErrorsById.value = {
+    ...updateErrorsById.value,
+    [suggestionId]: null
+  }
+
+  updatingSuggestionId.value = suggestionId
+
   try {
     const updated = await updateSuggestionStatus(suggestionId, status)
     employees.value = employees.value.map(employee => ({
@@ -63,7 +75,12 @@ const handleStatusUpdate = async ({ suggestionId, status }) => {
       )
     }))
   } catch (err) {
-    error.value = 'Failed to update suggestion status'
+    updateErrorsById.value = {
+      ...updateErrorsById.value,
+      [suggestionId]: 'Failed to update this suggestion'
+    }
+  } finally {
+    updatingSuggestionId.value = null
   }
 }
 

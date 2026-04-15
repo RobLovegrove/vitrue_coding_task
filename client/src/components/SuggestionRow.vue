@@ -1,11 +1,16 @@
 <template>
   <li class="suggestion-row">
     <span>{{ suggestion.description }}</span>
+
     <select :value="suggestion.status" @change="handleChange">
       <option v-for="status in statuses" :key="status" :value="status">
         {{ status }}
       </option>
     </select>
+
+    <span v-if="isUpdating">Saving...</span>
+    <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
+
   </li>
 </template>
 
@@ -14,6 +19,14 @@ const props = defineProps({
   suggestion: {
     type: Object,
     required: true
+  },
+  isUpdating: {
+    type: Boolean,
+    default: false
+  },
+  errorMessage: {
+    type: String,
+    default: null
   }
 })
 

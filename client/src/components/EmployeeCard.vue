@@ -7,6 +7,8 @@
         v-for="suggestion in employee.suggestions"
         :key="suggestion.id"
         :suggestion="suggestion"
+        :isUpdating="updatingSuggestionId === suggestion.id"
+        :errorMessage="updateErrorsById[suggestion.id]"
         @update:status="$emit('update:status', $event)"
       />
     </ul>
@@ -14,11 +16,18 @@
 </template>
 
 <script setup>
-
 import SuggestionRow from '@/components/SuggestionRow.vue'
 
 defineProps({
   employee: {
+    type: Object,
+    required: true
+  },
+  updatingSuggestionId: {
+    type: String,
+    default: null
+  },
+  updateErrorsById: {
     type: Object,
     required: true
   }

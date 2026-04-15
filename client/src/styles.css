@@ -1,0 +1,137 @@
+:root {
+    --bg: #f8f9fa;
+    --surface: #ffffff;
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --border: #dadce0;
+    --accent: #1a73e8;
+    --accent-hover: #1765cc;
+    --error: #d93025;
+    --success: #188038;
+    --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.15);
+    --shadow-md: 0 2px 6px rgba(60, 64, 67, 0.15);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body,
+  #app {
+    margin: 0;
+    min-height: 100%;
+    font-family: Inter, "Google Sans", Roboto, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg);
+  }
+  
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .app {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-4);
+  }
+  
+  h1 {
+    margin: 0 0 var(--space-5);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  
+  h2 {
+    margin: 0 0 var(--space-2);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+  
+  label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+  
+  select,
+  button,
+  input {
+    font: inherit;
+  }
+  
+  select,
+  input {
+    height: 36px;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-primary);
+    outline: none;
+  }
+  
+  select:focus,
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+  }
+  
+  button {
+    height: 36px;
+    padding: 0 var(--space-4);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: var(--accent-hover);
+  }
+  
+  button:disabled,
+  select:disabled,
+  input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .muted {
+    color: var(--text-secondary);
+  }
+  
+  .error {
+    color: var(--error);
+    font-size: 0.875rem;
+  }
+  
+  .success {
+    color: var(--success);
+    font-size: 0.875rem;
+  }

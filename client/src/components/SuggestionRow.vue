@@ -21,20 +21,15 @@
     </div>
     
     <div class="suggestion-controls">
-
         <span class="status-badge" :class="`status-${suggestion.status}`">
             {{ formatStatusLabel(suggestion.status) }}
         </span>
         
-        <select 
-            :value="suggestion.status"
-            :class="'status-select'"
-            @change="handleChange"
-        >
-            <option v-for="status in statuses" :key="status" :value="status">
-                {{ formatStatusLabel(status) }}
-            </option>
-        </select>
+        <BaseDropDown
+            :modelValue="suggestion.status"
+            :options="statusOptions"
+            @update:modelValue="handleStatusSelect"
+        />
 
         <span v-if="isUpdating">Saving...</span>
         <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
@@ -43,6 +38,7 @@
 </template>
 
 <script setup>
+import BaseDropDown from '@/components/BaseDropDown.vue'
 import { formatStatusLabel, formatLabel, formatDate } from '@/utils/formatters'
 
 const props = defineProps({
@@ -64,10 +60,15 @@ const emit = defineEmits(['update:status'])
 
 const statuses = ['pending', 'in_progress', 'completed', 'overdue']
 
-const handleChange = (event) => {
+const statusOptions = statuses.map((status) => ({
+  value: status,
+  label: formatStatusLabel(status)
+}))
+
+const handleStatusSelect = (status) => {
   emit('update:status', {
     suggestionId: props.suggestion.id,
-    status: event.target.value
+    status
   })
 }
 </script>

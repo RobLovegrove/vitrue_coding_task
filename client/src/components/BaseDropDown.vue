@@ -7,11 +7,11 @@
   
       <div v-if="isOpen" class="dropdown-menu">
         <button
-          v-for="option in options"
+          v-for="option in props.options"
           :key="option.value"
           type="button"
           class="dropdown-option"
-          :class="{ active: option.value === modelValue }"
+          :class="{ active: option.value === props.modelValue }"
           @click="selectOption(option.value)"
         >
           {{ option.label }}

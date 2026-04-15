@@ -23,6 +23,10 @@
             <p class="summary-label">Pending</p>
             <p class="summary-value">{{ summary.pending }}</p>
           </article>
+          <article class="summary-card pending">
+            <p class="summary-label">In Progress</p>
+            <p class="summary-value">{{ summary.in_progress }}</p>
+          </article>
           <article class="summary-card overdue">
             <p class="summary-label">Overdue</p>
             <p class="summary-value">{{ summary.overdue }}</p>
@@ -95,6 +99,7 @@ const summary = computed(() => {
   return {
     total: visibleSuggestions.length,
     pending: visibleSuggestions.filter(s => s.status === 'pending').length,
+    in_progress: visibleSuggestions.filter(s => s.status === 'in_progress').length,
     overdue: visibleSuggestions.filter(s => s.status === 'overdue').length
   }
 })

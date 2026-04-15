@@ -5,8 +5,13 @@
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
+      <SuggestionFilters
+        :statuses="statuses"
+        :selectedStatus="selectedStatus"
+        @update:selectedStatus="selectedStatus = $event"
+      />
       <EmployeeCard
-        v-for="employee in employees"
+        v-for="employee in filteredEmployees"
         :key="employee.id"
         :employee="employee"
         @update:status="handleStatusUpdate"
@@ -16,13 +21,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { getEmployees, updateSuggestionStatus } from '@/services/api'
 import EmployeeCard from '@/components/EmployeeCard.vue'
+import SuggestionFilters from '@/components/SuggestionFilters.vue'
 
 const employees = ref([])
 const loading = ref(true)
 const error = ref(null)
+const selectedStatus = ref('all')
+const statuses = ['all', 'pending', 'in_progress', 'completed', 'overdue']
 
 onMounted(async () => {
   try {
@@ -32,6 +40,17 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
+})
+
+const filteredEmployees = computed(() => {
+  if (selectedStatus.value === 'all') return employees.value
+
+  return employees.value
+    .map(employee => ({
+      ...employee,
+      suggestions: employee.suggestions.filter(s => s.status === selectedStatus.value)
+    }))
+    .filter(employee => employee.suggestions.length > 0)
 })
 
 const handleStatusUpdate = async ({ suggestionId, status }) => {

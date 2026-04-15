@@ -33,8 +33,20 @@ const getById = (id) => {
 const updateStatus = (id, status) => {
     const suggestion = suggestions.find(suggestion => suggestion.id === id);
     if (!suggestion) return null;
+
+    const now = new Date().toISOString();
     suggestion.status = status;
-    suggestion.dateUpdated = new Date().toISOString();
+    suggestion.dateUpdated = now;
+
+    if (status === 'completed') {
+        if (!suggestion.dateCompleted) {
+            suggestion.dateCompleted = now;
+        }
+    }
+    else {
+        delete suggestion.dateCompleted;
+    }
+    
     return {
         ...suggestion,
         employee: getEmployeeById(suggestion.employeeId)

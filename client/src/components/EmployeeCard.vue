@@ -1,7 +1,12 @@
 <template>
   <div class="employee">
     <h2>{{ employee.name }}</h2>
-    <p>{{ employee.department }} — {{ employee.riskLevel }} risk</p>
+    <p class="employee-meta">
+        {{ employee.department }} —
+    <span class="risk-badge" :class="`risk-${employee.riskLevel}`">
+        {{ employee.riskLevel }} risk
+    </span>
+    </p>
     <ul v-if="employee.suggestions.length > 0">
       <SuggestionRow
         v-for="suggestion in employee.suggestions"

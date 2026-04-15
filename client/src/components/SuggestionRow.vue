@@ -5,7 +5,9 @@
 
         <div class="suggestion-meta">
             <span class="meta-item">Type: {{ formatLabel(suggestion.type) }}</span>
-            <span class="meta-item">Priority: {{ formatLabel(suggestion.priority) }}</span>
+            <span class="priority-badge" :class="`priority-${suggestion.priority}`">
+                Priority: {{ formatLabel(suggestion.priority) }}
+            </span>
 
             <span class="meta-item">Source: {{ formatLabel(suggestion.source) }}</span>
             
@@ -19,10 +21,19 @@
     </div>
     
     <div class="suggestion-controls">
-        <select :value="suggestion.status" @change="handleChange">
-        <option v-for="status in statuses" :key="status" :value="status">
-            {{ formatStatusLabel(status) }}
-        </option>
+
+        <span class="status-badge" :class="`status-${suggestion.status}`">
+            {{ formatStatusLabel(suggestion.status) }}
+        </span>
+        
+        <select 
+            :value="suggestion.status"
+            :class="status-select"
+            @change="handleChange"
+        >
+            <option v-for="status in statuses" :key="status" :value="status">
+                {{ formatStatusLabel(status) }}
+            </option>
         </select>
 
         <span v-if="isUpdating">Saving...</span>

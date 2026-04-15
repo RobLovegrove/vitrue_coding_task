@@ -2,7 +2,7 @@
   <div class="employee">
     <h2>{{ employee.name }}</h2>
     <p>{{ employee.department }} — {{ employee.riskLevel }} risk</p>
-    <ul>
+    <ul v-if="employee.suggestions.length > 0">
       <SuggestionRow
         v-for="suggestion in employee.suggestions"
         :key="suggestion.id"
@@ -12,6 +12,7 @@
         @update:status="$emit('update:status', $event)"
       />
     </ul>
+    <p v-else>No suggestions for this employee.</p>
   </div>
 </template>
 

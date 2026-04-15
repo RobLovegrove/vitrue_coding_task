@@ -10,13 +10,15 @@
         :selectedStatus="selectedStatus"
         @update:selectedStatus="selectedStatus = $event"
       />
-      <EmployeeCard
-        v-for="employee in filteredEmployees"
-        :key="employee.id"
-        :employee="employee"
-        :updatingSuggestionId="updatingSuggestionId"
-        :updateErrorsById="updateErrorsById"
-        @update:status="handleStatusUpdate"
+      <div v-if="!hasSuggestionsInView">No suggestions match current filters.</div>
+        <EmployeeCard
+          v-else
+          v-for="employee in filteredEmployees"
+          :key="employee.id"
+          :employee="employee"
+          :updatingSuggestionId="updatingSuggestionId"
+          :updateErrorsById="updateErrorsById"
+          @update:status="handleStatusUpdate"
       />
     </div>
   </div>
@@ -56,6 +58,10 @@ const filteredEmployees = computed(() => {
     }))
     .filter(employee => employee.suggestions.length > 0)
 })
+
+const hasSuggestionsInView = computed(() => 
+  filteredEmployees.value.some(employee => employee.suggestions.length > 0)
+)
 
 const handleStatusUpdate = async ({ suggestionId, status }) => {
 

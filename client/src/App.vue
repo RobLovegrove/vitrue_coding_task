@@ -5,21 +5,46 @@
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
+      <div class="dashboard-toolbar">
+        <div class="toolbar-header">
+          <h2 class="toolbar-title">Suggestions Overview</h2>
+
+          <div class="summary-chips">
+            <span class="summary-chip">
+              <span class="chip-label">Total</span>
+              <span class="chip-value">{{ summary.total }}</span>
+            </span>
+            <span class="summary-chip pending">
+              <span class="chip-label">Pending</span>
+              <span class="chip-value">{{ summary.pending }}</span>
+            </span>
+            <span class="summary-chip overdue">
+              <span class="chip-label">Overdue</span>
+              <span class="chip-value">{{ summary.overdue }}</span>
+            </span>
+          </div>
+        </div>
+
       <SuggestionFilters
         :statuses="statuses"
         :selectedStatus="selectedStatus"
         @update:selectedStatus="selectedStatus = $event"
       />
-      <div v-if="!hasSuggestionsInView">No suggestions match current filters.</div>
-        <EmployeeCard
-          v-else
-          v-for="employee in filteredEmployees"
-          :key="employee.id"
-          :employee="employee"
-          :updatingSuggestionId="updatingSuggestionId"
-          :updateErrorsById="updateErrorsById"
-          @update:status="handleStatusUpdate"
-      />
+    </div>
+
+    <div v-if="!hasSuggestionsInView">
+      No suggestions match current filters.
+    </div>
+
+    <EmployeeCard
+      v-else
+      v-for="employee in filteredEmployees"
+      :key="employee.id"
+      :employee="employee"
+      :updatingSuggestionId="updatingSuggestionId"
+      :updateErrorsById="updateErrorsById"
+      @update:status="handleStatusUpdate"
+    />
     </div>
   </div>
 </template>
@@ -65,6 +90,15 @@ const filteredEmployees = computed(() => {
     if (riskDiff !== 0) return riskDiff
     return a.name.localeCompare(b.name)
   })
+})
+
+const summary = computed(() => {
+  const visibleSuggestions = filteredEmployees.value.flatMap(employee => employee.suggestions)
+  return {
+    total: visibleSuggestions.length,
+    pending: visibleSuggestions.filter(s => s.status === 'pending').length,
+    overdue: visibleSuggestions.filter(s => s.status === 'overdue').length
+  }
 })
 
 const hasSuggestionsInView = computed(() => 

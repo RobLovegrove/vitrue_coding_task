@@ -153,3 +153,57 @@
     background: #e6f4ea;
     border-color: #c7e7d0;
   }
+
+  .dashboard-toolbar {
+    border: 1px solid #e8eaed;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+  .toolbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .toolbar-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .summary-chips {
+    display: inline-flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .summary-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #f1f3f4;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+  .summary-chip .chip-value {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .summary-chip.pending {
+    background: #fff7d6;
+    color: #6b4f00;
+  }
+  .summary-chip.overdue {
+    background: #fce8e6;
+    color: #b3261e;
+  }
+  .empty-state {
+    border: 1px dashed #d2d6db;
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    color: var(--text-secondary);
+    background: #fcfcfd;
+  }

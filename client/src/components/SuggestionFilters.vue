@@ -1,7 +1,11 @@
 <template>
   <div class="filters">
-    <label>Filter by status:</label>
-    <select :value="selectedStatus" @change="$emit('update:selectedStatus', $event.target.value)">
+    <label for="status-filter">Filter by status:</label>
+    <select 
+      id="status-filter"
+      :value="selectedStatus" 
+      @change="$emit('update:selectedStatus', $event.target.value)"
+    >
       <option v-for="status in statuses" :key="status" :value="status">
         {{ formatStatusLabel(status) }}
       </option>

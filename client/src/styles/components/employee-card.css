@@ -79,6 +79,7 @@
 .employee-card-empty {
   margin: 0;
   padding: var(--space-3) 0;
+  text-align: center;
   font-size: 0.95rem;
   color: var(--text-secondary);
 }

@@ -52,4 +52,6 @@
   padding: var(--space-4);
   color: var(--text-secondary);
   background: #fcfcfd;
+  text-align: center;
+  width: 100%;
 }

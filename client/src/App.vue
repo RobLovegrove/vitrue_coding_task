@@ -35,7 +35,7 @@
       </section>
 
     <div v-if="!hasSuggestionsInView">
-      No suggestions match current filters.
+      <div class="empty-state">No suggestions match current filters.</div>
     </div>
 
     <EmployeeCard

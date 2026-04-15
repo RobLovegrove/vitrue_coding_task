@@ -9,6 +9,7 @@
         v-for="employee in employees"
         :key="employee.id"
         :employee="employee"
+        @update:status="handleStatusUpdate"
       />
     </div>
   </div>
@@ -16,7 +17,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getEmployees } from '@/services/api'
+import { getEmployees, updateSuggestionStatus } from '@/services/api'
 import EmployeeCard from '@/components/EmployeeCard.vue'
 
 const employees = ref([])
@@ -32,4 +33,19 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+const handleStatusUpdate = async ({ suggestionId, status }) => {
+  try {
+    const updated = await updateSuggestionStatus(suggestionId, status)
+    employees.value = employees.value.map(employee => ({
+      ...employee,
+      suggestions: employee.suggestions.map(s =>
+        s.id === updated.id ? updated : s
+      )
+    }))
+  } catch (err) {
+    error.value = 'Failed to update suggestion status'
+  }
+}
+
 </script>

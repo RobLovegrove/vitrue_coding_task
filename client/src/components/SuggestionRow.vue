@@ -8,8 +8,6 @@
             <span class="priority-badge" :class="`priority-${suggestion.priority}`">
                 Priority: {{ formatLabel(suggestion.priority) }}
             </span>
-
-            <span class="meta-item">Source: {{ formatLabel(suggestion.source) }}</span>
             
             <span v-if="suggestion.dateCompleted" class="meta-item">
                 Completed: {{ formatDate(suggestion.dateCompleted) }}
@@ -22,7 +20,7 @@
     
     <div class="suggestion-controls">
         <span class="status-badge" :class="`status-${suggestion.status}`">
-            {{ formatStatusLabel(suggestion.status) }}
+            {{ formatLabel(suggestion.status) }}
         </span>
         
         <BaseDropDown
@@ -39,7 +37,7 @@
 
 <script setup>
 import BaseDropDown from '@/components/BaseDropDown.vue'
-import { formatStatusLabel, formatLabel, formatDate } from '@/utils/formatters'
+import { formatLabel, formatDate } from '@/utils/formatters'
 
 const props = defineProps({
   suggestion: {
@@ -62,7 +60,7 @@ const statuses = ['pending', 'in_progress', 'completed', 'overdue']
 
 const statusOptions = statuses.map((status) => ({
   value: status,
-  label: formatStatusLabel(status)
+  label: formatLabel(status)
 }))
 
 const handleStatusSelect = (status) => {

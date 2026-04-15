@@ -11,7 +11,7 @@
 <script setup>
 import { computed } from 'vue'
 import BaseDropDown from '@/components/BaseDropDown.vue'
-import { formatStatusLabel } from '@/utils/formatters'
+import { formatLabel } from '@/utils/formatters'
 
 const props = defineProps({
   selectedStatus: {
@@ -28,7 +28,7 @@ defineEmits(['update:selectedStatus'])
 const statusOptions = computed(() =>
   props.statuses.map((status) => ({
     value: status,
-    label: formatStatusLabel(status)
+    label: formatLabel(status)
   }))
 )
 

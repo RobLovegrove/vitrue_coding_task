@@ -1,36 +1,36 @@
 <template>
   <li class="suggestion-row">
-    <div class="suggestion-content">
-        <p class="description">{{ suggestion.description }}</p>
-
-        <div class="suggestion-meta">
-            <span class="meta-item">Type: {{ formatLabel(suggestion.type) }}</span>
-            <span class="priority-badge" :class="`priority-${suggestion.priority}`">
-                Priority: {{ formatLabel(suggestion.priority) }}
-            </span>
-            
-            <span v-if="suggestion.dateCompleted" class="meta-item">
-                Completed: {{ formatDate(suggestion.dateCompleted) }}
-            </span>
-            <span v-else class="meta-item">
-                Updated: {{ formatDate(suggestion.dateUpdated) }}
-            </span>
-        </div>
+    <span
+      class="suggestion-dot"
+      :class="`dot-priority-${suggestion.priority}`"
+      aria-hidden="true"
+    />
+    <span class="type-pill">{{ formatLabel(suggestion.type) }}</span>
+    <div class="suggestion-main">
+      <p class="suggestion-title">{{ suggestion.description }}</p>
+      <p class="suggestion-sub">
+        <template v-if="suggestion.dateCompleted">
+          Completed {{ formatDate(suggestion.dateCompleted) }}
+        </template>
+        <template v-else>
+          Updated {{ formatDate(suggestion.dateUpdated) }}
+        </template>
+      </p>
     </div>
-    
-    <div class="suggestion-controls">        
-        <BaseDropDown
-            variant="status"
-            :modelValue="displayedStatus"
-            :options="statusOptions"
-            :class="statusClass"
-            @update:modelValue="handleStatusSelect"
-        />
-
-        <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
+    <div class="suggestion-controls">
+      <BaseDropDown
+        variant="status"
+        :modelValue="displayedStatus"
+        :options="statusOptions"
+        :class="statusClass"
+        @update:modelValue="handleStatusSelect"
+      />
+      <span v-if="isUpdating" class="saving-inline">Saving…</span>
+      <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
     </div>
   </li>
 </template>
+
 
 <script setup>
 import { ref, computed, watch } from 'vue'
@@ -55,6 +55,7 @@ const props = defineProps({
 const emit = defineEmits(['update:status'])
 const statuses = ['pending', 'in_progress', 'completed', 'overdue']
 const pendingStatus = ref(null)
+
 const displayedStatus = computed(() =>
   pendingStatus.value ?? props.suggestion.status
 )

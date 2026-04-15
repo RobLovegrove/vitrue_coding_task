@@ -4,7 +4,7 @@
 
     <select :value="suggestion.status" @change="handleChange">
       <option v-for="status in statuses" :key="status" :value="status">
-        {{ status }}
+        {{ formatStatusLabel(status) }}
       </option>
     </select>
 
@@ -15,6 +15,8 @@
 </template>
 
 <script setup>
+import { formatStatusLabel } from '@/utils/formatters'
+
 const props = defineProps({
   suggestion: {
     type: Object,

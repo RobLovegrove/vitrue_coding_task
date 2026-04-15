@@ -1,36 +1,34 @@
 <template>
   <div class="app">
-    <h1>MSK Suggestions Board</h1>
-
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="error">{{ error }}</div>
-    <div v-else>
-      <div class="dashboard-toolbar">
-        <div class="toolbar-header">
-          <h2 class="toolbar-title">Suggestions Overview</h2>
-
-          <div class="summary-chips">
-            <span class="summary-chip">
-              <span class="chip-label">Total</span>
-              <span class="chip-value">{{ summary.total }}</span>
-            </span>
-            <span class="summary-chip pending">
-              <span class="chip-label">Pending</span>
-              <span class="chip-value">{{ summary.pending }}</span>
-            </span>
-            <span class="summary-chip overdue">
-              <span class="chip-label">Overdue</span>
-              <span class="chip-value">{{ summary.overdue }}</span>
-            </span>
-          </div>
-        </div>
-
+    <div class="page-header">
+      <h1>MSK Suggestions Board</h1>
       <SuggestionFilters
         :statuses="statuses"
         :selectedStatus="selectedStatus"
         @update:selectedStatus="selectedStatus = $event"
       />
     </div>
+
+    <div v-if="loading">Loading...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else>
+      <section class="overview-section">
+        <h2 class="overview-title">Suggestions Overview</h2>
+        <div class="summary-grid">
+          <article class="summary-card">
+            <p class="summary-label">Total</p>
+            <p class="summary-value">{{ summary.total }}</p>
+          </article>
+          <article class="summary-card pending">
+            <p class="summary-label">Pending</p>
+            <p class="summary-value">{{ summary.pending }}</p>
+          </article>
+          <article class="summary-card overdue">
+            <p class="summary-label">Overdue</p>
+            <p class="summary-value">{{ summary.overdue }}</p>
+          </article>
+        </div>
+      </section>
 
     <div v-if="!hasSuggestionsInView">
       No suggestions match current filters.

@@ -28,7 +28,7 @@
         
         <select 
             :value="suggestion.status"
-            :class="status-select"
+            :class="'status-select'"
             @change="handleChange"
         >
             <option v-for="status in statuses" :key="status" :value="status">

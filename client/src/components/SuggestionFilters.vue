@@ -1,22 +1,19 @@
 <template>
-  <div class="filters">
-    <label for="status-filter">Filter by status:</label>
-    <select 
-      id="status-filter"
-      :value="selectedStatus" 
-      @change="$emit('update:selectedStatus', $event.target.value)"
-    >
-      <option v-for="status in statuses" :key="status" :value="status">
-        {{ formatStatusLabel(status) }}
-      </option>
-    </select>
+  <div class="filters-dropdown">
+    <BaseDropDown
+      :modelValue="selectedStatus"
+      :options="statusOptions"
+      @update:modelValue="$emit('update:selectedStatus', $event)"
+    />
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import BaseDropDown from '@/components/BaseDropDown.vue'
 import { formatStatusLabel } from '@/utils/formatters'
 
-defineProps({
+const props = defineProps({
   selectedStatus: {
     type: String,
     required: true
@@ -28,4 +25,11 @@ defineProps({
 })
 
 defineEmits(['update:selectedStatus'])
+const statusOptions = computed(() =>
+  props.statuses.map((status) => ({
+    value: status,
+    label: formatStatusLabel(status)
+  }))
+)
+
 </script>

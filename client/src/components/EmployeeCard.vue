@@ -1,7 +1,11 @@
 <template>
     <article class="employee-card">
       <header class="employee-card-header">
-        <div class="employee-avatar" aria-hidden="true">
+        <div
+          class="employee-avatar"
+          :class="`avatar-risk-${employee.riskLevel || 'low'}`"
+          aria-hidden="true"
+        >
           {{ initials }}
         </div>
         <div class="employee-card-titles">

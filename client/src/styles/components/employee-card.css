@@ -49,8 +49,26 @@
   justify-content: center;
   font-size: 0.875rem;
   font-weight: 600;
+  border: 1px solid transparent;
+}
+
+
+.employee-avatar.avatar-risk-high {
   color: #b3261e;
   background: #fce8e6;
+  border-color: #f6c7c3;
+}
+
+.employee-avatar.avatar-risk-medium {
+  color: #a15c00;
+  background: #fef7e0;
+  border-color: #fde293;
+}
+
+.employee-avatar.avatar-risk-low {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #c7e7d0;
 }
 
 .employee-card-titles {

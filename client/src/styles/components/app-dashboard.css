@@ -8,6 +8,12 @@
   margin-bottom: var(--space-5);
 }
 
+/* h1 has global margin-bottom; inside the header row that stretches the flex line and
+   makes the filter look vertically lower than the title — reset here, keep spacing on the row */
+.page-header h1 {
+  margin: 0;
+}
+
 .overview-section {
   margin-bottom: var(--space-5);
 }

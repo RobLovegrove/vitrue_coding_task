@@ -4,22 +4,6 @@ const store = require('../data/store');
 
 const VALID_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
 
-router.get('/', (req, res) => {
-    try {
-        let suggestions = store.getAllSuggestions();
-
-        if (req.query.status) {
-            suggestions = suggestions.filter(s => s.status === req.query.status);
-        }
-        if (req.query.employeeId) {
-            suggestions = suggestions.filter(s => s.employeeId === req.query.employeeId);
-        }
-        res.json(suggestions);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to retrieve suggestions' });
-    }
-});
-
 router.patch('/:id', (req, res) => {
     try {
         const { status } = req.body;

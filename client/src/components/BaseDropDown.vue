@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown" ref="rootEl">
+    <div class="dropdown" :class="`dropdown-${props.variant}`" ref="rootEl">
       <button type="button" class="dropdown-trigger" @click="isOpen = !isOpen">
         <span class="dropdown-label">{{ selectedLabel }}</span>
         <span class="dropdown-caret">{{ isOpen ? '▴' : '▾' }}</span>
@@ -25,7 +25,12 @@
   
   const props = defineProps({
     modelValue: { type: String, required: true },
-    options: { type: Array, required: true }
+    options: { type: Array, required: true },
+    variant: {
+        type: String,
+        default: 'default',
+        validator: (value) => ['default', 'status'].includes(value)
+    }
   })
   
   const emit = defineEmits(['update:modelValue'])

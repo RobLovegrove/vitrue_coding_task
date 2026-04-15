@@ -18,24 +18,22 @@
         </div>
     </div>
     
-    <div class="suggestion-controls">
-        <span class="status-badge" :class="`status-${suggestion.status}`">
-            {{ formatLabel(suggestion.status) }}
-        </span>
-        
+    <div class="suggestion-controls">        
         <BaseDropDown
-            :modelValue="suggestion.status"
+            variant="status"
+            :modelValue="displayedStatus"
             :options="statusOptions"
+            :class="statusClass"
             @update:modelValue="handleStatusSelect"
         />
 
-        <span v-if="isUpdating">Saving...</span>
         <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
     </div>
   </li>
 </template>
 
 <script setup>
+import { ref, computed, watch } from 'vue'
 import BaseDropDown from '@/components/BaseDropDown.vue'
 import { formatLabel, formatDate } from '@/utils/formatters'
 
@@ -55,18 +53,33 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:status'])
-
 const statuses = ['pending', 'in_progress', 'completed', 'overdue']
+const pendingStatus = ref(null)
+const displayedStatus = computed(() =>
+  pendingStatus.value ?? props.suggestion.status
+)
+
+const statusClass = computed(() => `status-${displayedStatus.value}`)
 
 const statusOptions = statuses.map((status) => ({
-  value: status,
-  label: formatLabel(status)
+    value: status,
+    label: formatLabel(status)
 }))
 
 const handleStatusSelect = (status) => {
+  pendingStatus.value = status
   emit('update:status', {
     suggestionId: props.suggestion.id,
     status
   })
 }
+
+watch(
+  () => props.isUpdating,
+  (isUpdatingNow) => {
+    if (!isUpdatingNow) {
+      pendingStatus.value = null
+    }
+  }
+)
 </script>

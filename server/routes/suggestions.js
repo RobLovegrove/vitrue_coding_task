@@ -17,7 +17,7 @@ router.patch('/:id', async (req, res) => {
             });
         }
 
-        //await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
         const updated = store.updateStatus(req.params.id, status);
 

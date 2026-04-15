@@ -1,6 +1,7 @@
 <template>
   <div class="filters-dropdown">
     <BaseDropDown
+      variant="default"
       :modelValue="selectedStatus"
       :options="statusOptions"
       @update:modelValue="$emit('update:selectedStatus', $event)"

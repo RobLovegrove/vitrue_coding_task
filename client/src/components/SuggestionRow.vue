@@ -1,21 +1,35 @@
 <template>
   <li class="suggestion-row">
-    <span>{{ suggestion.description }}</span>
+    <div class="suggestion-content">
+        <p class="description">{{ suggestion.description }}</p>
 
-    <select :value="suggestion.status" @change="handleChange">
-      <option v-for="status in statuses" :key="status" :value="status">
-        {{ formatStatusLabel(status) }}
-      </option>
-    </select>
+        <div class="suggestion-meta">
+            <span class="meta-item">Type: {{ formatLabel(suggestion.type) }}</span>
+            <span class="meta-item">Priority: {{ formatLabel(suggestion.priority) }}</span>
+            <span v-if="suggestion.dateCompleted" class="meta-item">
+                Completed: {{ formatDate(suggestion.dateCompleted) }}
+            </span>
+            <span v-else class="meta-item">
+                Updated: {{ formatDate(suggestion.dateUpdated) }}
+            </span>
+        </div>
+    </div>
+    
+    <div class="suggestion-controls">
+        <select :value="suggestion.status" @change="handleChange">
+        <option v-for="status in statuses" :key="status" :value="status">
+            {{ formatStatusLabel(status) }}
+        </option>
+        </select>
 
-    <span v-if="isUpdating">Saving...</span>
-    <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
-
+        <span v-if="isUpdating">Saving...</span>
+        <span v-if="errorMessage" class="error">{{ errorMessage }}</span>
+    </div>
   </li>
 </template>
 
 <script setup>
-import { formatStatusLabel } from '@/utils/formatters'
+import { formatStatusLabel, formatLabel, formatDate } from '@/utils/formatters'
 
 const props = defineProps({
   suggestion: {

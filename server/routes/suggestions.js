@@ -4,7 +4,7 @@ const store = require('../data/store');
 
 const VALID_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
         const { status } = req.body;
 
@@ -16,6 +16,9 @@ router.patch('/:id', (req, res) => {
                 error: `Status must be one of: ${VALID_STATUSES.join(', ')}` 
             });
         }
+
+        //await new Promise((resolve) => setTimeout(resolve, 800));
+
         const updated = store.updateStatus(req.params.id, status);
 
         if (!updated) {

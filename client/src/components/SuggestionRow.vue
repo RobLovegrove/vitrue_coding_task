@@ -6,6 +6,9 @@
         <div class="suggestion-meta">
             <span class="meta-item">Type: {{ formatLabel(suggestion.type) }}</span>
             <span class="meta-item">Priority: {{ formatLabel(suggestion.priority) }}</span>
+
+            <span class="meta-item">Source: {{ formatLabel(suggestion.source) }}</span>
+            
             <span v-if="suggestion.dateCompleted" class="meta-item">
                 Completed: {{ formatDate(suggestion.dateCompleted) }}
             </span>

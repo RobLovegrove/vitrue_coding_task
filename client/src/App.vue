@@ -37,6 +37,7 @@ const selectedStatus = ref('all')
 const statuses = ['all', 'pending', 'in_progress', 'completed', 'overdue']
 const updatingSuggestionId = ref(null)
 const updateErrorsById = ref({})
+const riskRank = { high: 3, medium: 2, low: 1 }
 
 onMounted(async () => {
   try {
@@ -49,14 +50,21 @@ onMounted(async () => {
 })
 
 const filteredEmployees = computed(() => {
-  if (selectedStatus.value === 'all') return employees.value
-
-  return employees.value
-    .map(employee => ({
-      ...employee,
-      suggestions: employee.suggestions.filter(s => s.status === selectedStatus.value)
-    }))
-    .filter(employee => employee.suggestions.length > 0)
+  const visibleEmployees = selectedStatus.value === 'all'
+      ? employees.value
+      : employees.value
+          .map((employee) => ({
+            ...employee,
+            suggestions: employee.suggestions.filter(
+              (s) => s.status === selectedStatus.value
+            )
+          }))
+          .filter((employee) => employee.suggestions.length > 0)
+  return [...visibleEmployees].sort((a, b) => {
+    const riskDiff = (riskRank[b.riskLevel] || 0) - (riskRank[a.riskLevel] || 0)
+    if (riskDiff !== 0) return riskDiff
+    return a.name.localeCompare(b.name)
+  })
 })
 
 const hasSuggestionsInView = computed(() => 

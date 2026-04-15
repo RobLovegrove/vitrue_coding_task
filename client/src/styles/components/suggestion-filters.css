@@ -1,0 +1,6 @@
+/* SuggestionFilters.vue — wrapper only if needed */
+
+.filters-dropdown {
+  position: relative;
+  display: inline-block;
+}

@@ -1,0 +1,8 @@
+/* Component styles — import order: shared badges, layout, then feature components */
+
+@import './badges.css';
+@import './app-dashboard.css';
+@import './employee-card.css';
+@import './suggestion-row.css';
+@import './suggestion-filters.css';
+@import './dropdown.css';

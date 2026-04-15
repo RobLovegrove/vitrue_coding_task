@@ -1,0 +1,115 @@
+/* BaseDropDown.vue */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  background: transparent;
+}
+
+.dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.dropdown-trigger:hover {
+  background: #f8f9fa;
+}
+
+.dropdown-label {
+  font-size: 0.9rem;
+}
+
+.dropdown-caret {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  min-width: 180px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+}
+
+.dropdown-option {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dropdown-option:hover {
+  background: #f1f3f4;
+}
+
+.dropdown-option.active {
+  background: #e8f0fe;
+  color: #174ea6;
+  font-weight: 500;
+}
+
+.dropdown-status .dropdown-trigger {
+  height: auto;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  background: #f1f3f4;
+}
+
+.dropdown-status {
+  background: transparent;
+}
+
+.dropdown-status .dropdown-caret {
+  font-size: 0.65rem;
+}
+
+.dropdown-status .dropdown-menu {
+  min-width: 150px;
+}
+
+.dropdown-status.status-pending .dropdown-trigger {
+  color: #6b4f00;
+  background: #fff7d6;
+  border-color: #f6df8b;
+}
+
+.dropdown-status.status-in_progress .dropdown-trigger {
+  color: #174ea6;
+  background: #e8f0fe;
+  border-color: #c6dafc;
+}
+
+.dropdown-status.status-completed .dropdown-trigger {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+}
+
+.dropdown-status.status-overdue .dropdown-trigger {
+  color: #b3261e;
+  background: #fce8e6;
+  border-color: #f6c7c3;
+}

@@ -1,0 +1,90 @@
+/* Shared pill badges: risk, status, priority */
+
+.risk-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.risk-high {
+  color: #b3261e;
+  background: #fce8e6;
+  border-color: #f6c7c3;
+}
+
+.risk-medium {
+  color: #a15c00;
+  background: #fef7e0;
+  border-color: #fde293;
+}
+
+.risk-low {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.status-badge.status-pending {
+  color: #6b4f00;
+  background: #fff7d6;
+  border-color: #f6df8b;
+}
+
+.status-badge.status-in_progress {
+  color: #174ea6;
+  background: #e8f0fe;
+  border-color: #c6dafc;
+}
+
+.status-badge.status-completed {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+}
+
+.status-badge.status-overdue {
+  color: #b3261e;
+  background: #fce8e6;
+  border-color: #f6c7c3;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.priority-high {
+  color: #b3261e;
+  background: #fce8e6;
+  border-color: #f6c7c3;
+}
+
+.priority-medium {
+  color: #a15c00;
+  background: #fef7e0;
+  border-color: #fde293;
+}
+
+.priority-low {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+}

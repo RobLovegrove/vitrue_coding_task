@@ -1,0 +1,55 @@
+/* App.vue — header, summary, empty state */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.overview-section {
+  margin-bottom: var(--space-5);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.summary-card {
+  background: var(--surface);
+  border: 1px solid #e8eaed;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.summary-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 720px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty-state {
+  border: 1px dashed #d2d6db;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  color: var(--text-secondary);
+  background: #fcfcfd;
+}

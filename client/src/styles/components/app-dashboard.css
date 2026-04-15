@@ -40,6 +40,19 @@
   color: var(--text-primary);
 }
 
+/* Summary numbers — semantic colours (Total stays default) */
+.summary-card.pending .summary-value {
+  color: #c57000;
+}
+
+.summary-card.in-progress .summary-value {
+  color: #174ea6;
+}
+
+.summary-card.overdue .summary-value {
+  color: #c31b12;
+}
+
 @media (max-width: 720px) {
   .summary-grid {
     grid-template-columns: 1fr;

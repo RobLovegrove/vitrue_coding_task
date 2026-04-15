@@ -23,7 +23,7 @@
             <p class="summary-label">Pending</p>
             <p class="summary-value">{{ summary.pending }}</p>
           </article>
-          <article class="summary-card pending">
+          <article class="summary-card in-progress">
             <p class="summary-label">In Progress</p>
             <p class="summary-value">{{ summary.in_progress }}</p>
           </article>

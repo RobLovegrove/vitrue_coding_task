@@ -108,6 +108,42 @@
   margin: 0;
   font-size: 0.8125rem;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.source-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.source-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.source-vida {
+  color: #1967d2;
+  background: #e8f0fe;
+}
+
+.source-admin {
+  color: #7b1fa2;
+  background: #f3e8fd;
+}
+
+.suggestion-date {
+  color: var(--text-secondary);
 }
 
 .suggestion-controls {

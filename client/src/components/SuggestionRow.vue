@@ -14,6 +14,10 @@
     <div class="suggestion-main">
       <p class="suggestion-title">{{ suggestion.description }}</p>
       <p class="suggestion-sub">
+        <span class="source-pill" :class="`source-${suggestion.source}`">
+            <span class="source-pill-dot" aria-hidden="true"></span>
+            {{ formatLabel(suggestion.source) }}
+        </span>
         <template v-if="suggestion.dateCompleted">
           Completed {{ formatDate(suggestion.dateCompleted) }}
         </template>

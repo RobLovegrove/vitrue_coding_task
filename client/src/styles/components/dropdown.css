@@ -27,6 +27,33 @@
   font-size: 0.9rem;
 }
 
+.dropdown.dropdown-default {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dropdown-default .dropdown-trigger {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dropdown-default .dropdown-label {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.dropdown-default .dropdown-caret {
+  flex-shrink: 0;
+}
+
 .dropdown-caret {
   color: var(--text-secondary);
   font-size: 0.75rem;

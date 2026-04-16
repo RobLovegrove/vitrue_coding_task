@@ -6,6 +6,7 @@
   justify-content: space-between;
   gap: var(--space-3);
   margin-bottom: var(--space-5);
+  min-width: 0;
 }
 
 /* h1 has global margin-bottom; inside the header row that stretches the flex line and
@@ -15,10 +16,14 @@
 }
 
 .page-header-filters {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--space-3);
   padding-right: var(--space-2);
+  margin-left: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .overview-section {

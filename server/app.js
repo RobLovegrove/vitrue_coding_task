@@ -12,9 +12,11 @@ app.use(express.json());
 app.use('/api/suggestions', suggestionRoutes);
 app.use('/api/employees', employeeRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`)
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`)
+    })
+}
 
 module.exports = app
 

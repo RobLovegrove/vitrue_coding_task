@@ -18,6 +18,10 @@
     --space-4: 16px;
     --space-5: 24px;
     --space-6: 32px;
+    --space-7: 40px;
+    --space-8: 48px;
+    --space-9: 56px;
+    --space-10: 64px;
 }
 
 *,
@@ -45,7 +49,7 @@ body {
     max-width: 960px;
     margin: 0 auto;
     padding: var(--space-6) var(--space-4);
-    padding-top: calc(var(--space-6) + var(--space-4) + var(--space-3));
+    padding-top: calc(var(--space-10) + var(--space-7));
 }
 
 h1 {

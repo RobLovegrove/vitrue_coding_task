@@ -17,12 +17,49 @@
   border-bottom: none;
 }
 
+.suggestion-dot-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
 .suggestion-dot {
+  display: inline-block;
   flex-shrink: 0;
   width: 10px;
   height: 10px;
-  margin-top: 6px;
   border-radius: 50%;
+}
+
+.suggestion-tooltip-text {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--text-primary);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  font-weight: 500;
+  border: 1px solid #e8eaed;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+  z-index: 10;
+}
+
+.suggestion-dot-tooltip:hover .suggestion-tooltip-text,
+.suggestion-dot-tooltip:focus-within .suggestion-tooltip-text {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dot-priority-high {

@@ -1,10 +1,15 @@
 <template>
   <li class="suggestion-row">
-    <span
-      class="suggestion-dot"
-      :class="`dot-priority-${suggestion.priority}`"
-      aria-hidden="true"
-    />
+    <span class="suggestion-dot-tooltip">
+      <span
+        class="suggestion-dot"
+        :class="`dot-priority-${suggestion.priority}`"
+        :aria-label="`Priority: ${formatLabel(suggestion.priority)}`"
+      ></span>
+      <span class="suggestion-tooltip-text" role="tooltip">
+        {{ formatLabel(suggestion.priority) }} priority
+      </span>
+    </span>
     <span class="type-pill">{{ formatLabel(suggestion.type) }}</span>
     <div class="suggestion-main">
       <p class="suggestion-title">{{ suggestion.description }}</p>

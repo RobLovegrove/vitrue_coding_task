@@ -43,4 +43,16 @@ describe('store.updateStatus', () => {
         expect(result.dateCompleted).toBeDefined()
         expect(Number.isNaN(Date.parse(result.dateUpdated))).toBe(false)
     })
+
+    test('clears dateCompleted when status moves away from completed', () => {
+        const id = '550e8400-e29b-41d4-a716-446655440001'
+      
+        const completed = store.updateStatus(id, 'completed')
+        expect(completed.dateCompleted).toBeDefined()
+      
+        const updated = store.updateStatus(id, 'in_progress')
+        expect(updated.status).toBe('in_progress')
+        expect(updated.dateCompleted).toBeUndefined()
+        expect(Number.isNaN(Date.parse(updated.dateUpdated))).toBe(false)
+    })
 })

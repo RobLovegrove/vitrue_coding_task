@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 12px 110px minmax(0, 1fr) 140px;
   column-gap: var(--space-3);
-  align-items: start;
+  align-items: center;
   padding: var(--space-3) 0;
   border: none;
   border-bottom: 1px solid #eceff1;
@@ -78,8 +78,8 @@
   width: max-content;
   max-width: 100%;
   justify-self: start;
-  align-self: flex-start;
-  margin-top: 2px;
+  align-self: center;
+  margin-top: 0;
   padding: 2px 8px;
   font-size: 0.75rem;
   font-weight: 500;

@@ -14,6 +14,13 @@
   margin: 0;
 }
 
+.page-header-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-right: var(--space-2);
+}
+
 .overview-section {
   margin-bottom: var(--space-5);
 }

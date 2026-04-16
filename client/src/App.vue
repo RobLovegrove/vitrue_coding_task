@@ -2,11 +2,20 @@
   <div class="app">
     <div class="page-header">
       <h1>MSK Suggestions Board</h1>
-      <SuggestionFilters
-        :statuses="statuses"
-        :selectedStatus="selectedStatus"
-        @update:selectedStatus="selectedStatus = $event"
-      />
+      <div class="page-header-filters">
+        <SelectFilter
+          :options="departments"
+          :selectedValue="selectedDepartment"
+          allLabel="All Departments"
+          @update:selectedValue="selectedDepartment = $event"
+        />
+        <SelectFilter
+          :options="statuses"
+          :selectedValue="selectedStatus"
+          allLabel="All Suggestions"
+          @update:selectedValue="selectedStatus = $event"
+        />
+      </div>
     </div>
 
     <div v-if="loading">Loading...</div>
@@ -55,15 +64,24 @@
 import { ref, onMounted, computed } from 'vue'
 import { getEmployees, updateSuggestionStatus } from '@/services/api'
 import EmployeeCard from '@/components/EmployeeCard.vue'
-import SuggestionFilters from '@/components/SuggestionFilters.vue'
+import SelectFilter from './components/SelectFilter.vue'
 
 const employees = ref([])
 const loading = ref(true)
 const error = ref(null)
+
 const selectedStatus = ref('all')
 const statuses = ['all', 'pending', 'in_progress', 'completed', 'overdue']
+
+const selectedDepartment = ref('all')
+const departments = computed(() => [
+  'all',
+  ...new Set(employees.value.map(e => e.department))
+])
+
 const updatingSuggestionId = ref(null)
 const updateErrorsById = ref({})
+
 const riskRank = { high: 3, medium: 2, low: 1 }
 
 onMounted(async () => {
@@ -77,9 +95,17 @@ onMounted(async () => {
 })
 
 const filteredEmployees = computed(() => {
-  const visibleEmployees = selectedStatus.value === 'all'
+
+  const employeesForDepartment =
+    selectedDepartment.value === 'all'
       ? employees.value
-      : employees.value
+      : employees.value.filter(
+          (employee) => employee.department === selectedDepartment.value
+        )
+
+  const visibleEmployees = selectedStatus.value === 'all'
+      ? employeesForDepartment
+      : employeesForDepartment
           .map((employee) => ({
             ...employee,
             suggestions: employee.suggestions.filter(

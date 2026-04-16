@@ -1,5 +1,5 @@
-export const formatLabel = (value) => {
-    if (value === 'all') return 'All Suggestions'
+export const formatLabel = (value, allLabel = "All") => {
+    if (value === 'all') return allLabel
     return value
       .split('_')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

@@ -14,7 +14,7 @@
     <div class="suggestion-main">
       <p class="suggestion-title">{{ suggestion.description }}</p>
       <p class="suggestion-sub">
-        <span class="source-pill" :class="`source-${suggestion.source}`">
+        <span class="source-pill" :class="sourcePillClass">
             <span class="source-pill-dot" aria-hidden="true"></span>
             {{ formatLabel(suggestion.source) }}
         </span>
@@ -70,6 +70,13 @@ const displayedStatus = computed(() =>
 )
 
 const statusClass = computed(() => `status-${displayedStatus.value}`)
+
+const sourcePillClass = computed(() => {
+  const s = (props.suggestion.source || '').toLowerCase()
+  if (s === 'admin') return 'source-admin'
+  if (s === 'vida') return 'source-vida'
+  return 'source-other'
+})
 
 const statusOptions = statuses.map((status) => ({
     value: status,

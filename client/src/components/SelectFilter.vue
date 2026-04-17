@@ -30,12 +30,6 @@ const props = defineProps({
 })
 
 defineEmits(['update:selectedValue'])
-const statusOptions = computed(() =>
-  props.options.map((option) => ({
-    value: option,
-    label: formatLabel(option)
-  }))
-)
 
 const dropdownOptions = computed(() =>
   props.options.map((option) => ({

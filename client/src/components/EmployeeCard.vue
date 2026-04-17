@@ -21,7 +21,7 @@
           v-for="suggestion in employee.suggestions"
           :key="suggestion.id"
           :suggestion="suggestion"
-          :isUpdating="updatingSuggestionId === suggestion.id"
+          :isUpdating="updatingSuggestionIds.has(suggestion.id)"
           :errorMessage="updateErrorsById[suggestion.id]"
           @update:status="$emit('update:status', $event)"
         />
@@ -39,9 +39,9 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  updatingSuggestionId: {
-    type: String,
-    default: null
+  updatingSuggestionIds: {
+    type: Object,
+    required: true
   },
   updateErrorsById: {
     type: Object,

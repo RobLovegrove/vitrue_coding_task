@@ -52,7 +52,7 @@
       v-for="employee in filteredEmployees"
       :key="employee.id"
       :employee="employee"
-      :updatingSuggestionId="updatingSuggestionId"
+      :updatingSuggestionIds="updatingSuggestionIds"
       :updateErrorsById="updateErrorsById"
       @update:status="handleStatusUpdate"
     />
@@ -79,7 +79,7 @@ const departments = computed(() => [
   ...new Set(employees.value.map(e => e.department))
 ])
 
-const updatingSuggestionId = ref(null)
+const updatingSuggestionIds = ref(new Set())
 const updateErrorsById = ref({})
 
 const riskRank = { high: 3, medium: 2, low: 1 }
@@ -141,7 +141,9 @@ const handleStatusUpdate = async ({ suggestionId, status }) => {
     [suggestionId]: null
   }
 
-  updatingSuggestionId.value = suggestionId
+  const nextUpdatingIds = new Set(updatingSuggestionIds.value)
+  nextUpdatingIds.add(suggestionId)
+  updatingSuggestionIds.value = nextUpdatingIds
 
   try {
     const updated = await updateSuggestionStatus(suggestionId, status)
@@ -157,7 +159,9 @@ const handleStatusUpdate = async ({ suggestionId, status }) => {
       [suggestionId]: 'Failed to update this suggestion'
     }
   } finally {
-    updatingSuggestionId.value = null
+    const nextUpdatingIds = new Set(updatingSuggestionIds.value)
+    nextUpdatingIds.delete(suggestionId)
+    updatingSuggestionIds.value = nextUpdatingIds
   }
 }
 

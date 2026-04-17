@@ -147,10 +147,6 @@
   background: #f1f3f4;
 }
 
-.suggestion-date {
-  color: var(--text-secondary);
-}
-
 .suggestion-controls {
   display: flex;
   flex-direction: column;
@@ -163,32 +159,4 @@
 .saving-inline {
   font-size: 0.75rem;
   color: var(--text-secondary);
-}
-
-/* Legacy helpers if used elsewhere */
-.meta-item {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  background: #f1f3f4;
-  border-radius: 999px;
-  padding: 2px 8px;
-}
-
-.suggestion-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.suggestion-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.suggestion-row .description {
-  flex: 1;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  line-height: 1.4;
 }

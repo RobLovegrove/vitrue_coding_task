@@ -66,12 +66,15 @@ npm test
 
 ## Future Improvements
 
+- Add schema validation at API boundaries (e.g. Zod/Joi) for request payloads and route params, including UUID validation for suggestion IDs.
+- Validate seed/data records at startup and enforce a consistent error response shape (error codes plus field-level validation details).
 - Add authentication/authorization so status changes are restricted to appropriate admin roles.
 - Replace in-memory storage with a persistent database (and add migrations) so updates survive restarts.
 - Add server-side filtering/sorting/pagination for larger datasets and lower payload sizes.
 - Add observability basics (request logging, error monitoring, health checks) for easier debugging in real deployments.
+- Add additional testing, particularly adding frontend test, tests for GET /api/employees and end to end flow validation.
 - Containerize and add CI steps (lint/test/build) for consistent local/dev/prod workflows.
 - Surface overdue suggestions more prominently, potentially with 
-  automated status transitions based on date logic.
+automated status transitions based on date logic.
 - Add a suggestion creation flow so admins can log recommendations 
-  directly rather than only via VIDA.
+directly rather than only via VIDA.

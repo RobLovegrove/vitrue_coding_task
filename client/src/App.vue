@@ -88,6 +88,7 @@ onMounted(async () => {
   try {
     employees.value = await getEmployees()
   } catch (err) {
+    console.error('Failed to load employees', err)
     error.value = 'Failed to load data. Is the server running?'
   } finally {
     loading.value = false
@@ -154,6 +155,7 @@ const handleStatusUpdate = async ({ suggestionId, status }) => {
       )
     }))
   } catch (err) {
+    console.error(`Failed to update suggestion ${suggestionId}`, err)
     updateErrorsById.value = {
       ...updateErrorsById.value,
       [suggestionId]: 'Failed to update this suggestion'

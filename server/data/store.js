@@ -3,7 +3,7 @@ const data = require('./sample-data.json');
 let suggestions = data.suggestions;
 const employees = data.employees;
 
-// Get all empoyees with their suggestions nested within
+// Get all employees with their suggestions nested within
 const getAllEmployees = () => employees.map(employee => ({
     ...employee,
     suggestions: suggestions.filter(s => s.employeeId === employee.id)

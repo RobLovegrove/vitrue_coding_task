@@ -2,29 +2,33 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background: transparent;
 }
 
-.dropdown-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
+.dropdown-native {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   height: 36px;
-  padding: 0 10px;
+  padding: 0 30px 0 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
   color: var(--text-primary);
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
-.dropdown-trigger:hover {
+.dropdown-native:hover {
   background: #f8f9fa;
 }
 
-.dropdown-label {
-  font-size: 0.9rem;
+.dropdown-native:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
 }
 
 .dropdown.dropdown-default {
@@ -34,69 +38,27 @@
   max-width: 100%;
 }
 
-.dropdown-default .dropdown-trigger {
-  display: flex;
+.dropdown-default .dropdown-native {
+  display: block;
   width: 100%;
   min-width: 0;
   max-width: 100%;
 }
 
-.dropdown-default .dropdown-label {
-  min-width: 0;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: left;
-}
-
-.dropdown-default .dropdown-caret {
-  flex-shrink: 0;
-}
-
 .dropdown-caret {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
   color: var(--text-secondary);
   font-size: 0.75rem;
+  line-height: 1;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  z-index: 20;
-  min-width: 180px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  padding: 6px;
-}
-
-.dropdown-option {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: transparent;
-  color: var(--text-primary);
-  border-radius: 6px;
-  padding: 8px 10px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.dropdown-option:hover {
-  background: #f1f3f4;
-}
-
-.dropdown-option.active {
-  background: #e8f0fe;
-  color: #174ea6;
-  font-weight: 500;
-}
-
-.dropdown-status .dropdown-trigger {
+.dropdown-status .dropdown-native {
   height: auto;
-  padding: 2px 10px;
+  padding: 2px 26px 2px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
   font-size: 0.78rem;
@@ -111,31 +73,28 @@
 
 .dropdown-status .dropdown-caret {
   font-size: 0.65rem;
+  right: 8px;
 }
 
-.dropdown-status .dropdown-menu {
-  min-width: 150px;
-}
-
-.dropdown-status.status-pending .dropdown-trigger {
+.dropdown-status.status-pending .dropdown-native {
   color: #6b4f00;
   background: #fff7d6;
   border-color: #f6df8b;
 }
 
-.dropdown-status.status-in_progress .dropdown-trigger {
+.dropdown-status.status-in_progress .dropdown-native {
   color: #174ea6;
   background: #e8f0fe;
   border-color: #c6dafc;
 }
 
-.dropdown-status.status-completed .dropdown-trigger {
+.dropdown-status.status-completed .dropdown-native {
   color: #137333;
   background: #e6f4ea;
   border-color: #c7e7d0;
 }
 
-.dropdown-status.status-overdue .dropdown-trigger {
+.dropdown-status.status-overdue .dropdown-native {
   color: #b3261e;
   background: #fce8e6;
   border-color: #f6c7c3;

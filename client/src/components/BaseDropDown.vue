@@ -1,59 +1,32 @@
 <template>
-    <div class="dropdown" :class="`dropdown-${props.variant}`" ref="rootEl">
-      <button type="button" class="dropdown-trigger" @click="isOpen = !isOpen">
-        <span class="dropdown-label">{{ selectedLabel }}</span>
-        <span class="dropdown-caret">{{ isOpen ? '▴' : '▾' }}</span>
-      </button>
-  
-      <div v-if="isOpen" class="dropdown-menu">
-        <button
-          v-for="option in props.options"
-          :key="option.value"
-          type="button"
-          class="dropdown-option"
-          :class="{ active: option.value === props.modelValue }"
-          @click="selectOption(option.value)"
-        >
-          {{ option.label }}
-        </button>
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-  
-  const props = defineProps({
-    modelValue: { type: String, required: true },
-    options: { type: Array, required: true },
-    variant: {
-        type: String,
-        default: 'default',
-        validator: (value) => ['default', 'status'].includes(value)
-    }
-  })
-  
-  const emit = defineEmits(['update:modelValue'])
-  
-  const isOpen = ref(false)
-  const rootEl = ref(null)
-  
-  const selectedLabel = computed(() => {
-    const match = props.options.find((o) => o.value === props.modelValue)
-    return match ? match.label : props.modelValue
-  })
-  
-  const selectOption = (value) => {
-    emit('update:modelValue', value)
-    isOpen.value = false
+  <div class="dropdown" :class="`dropdown-${props.variant}`">
+    <select
+      class="dropdown-native"
+      :value="props.modelValue"
+      @change="emit('update:modelValue', $event.target.value)"
+    >
+      <option
+        v-for="option in props.options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <span class="dropdown-caret" aria-hidden="true">▾</span>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  modelValue: { type: String, required: true },
+  options: { type: Array, required: true },
+  variant: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'status'].includes(value)
   }
-  
-  const handleOutsideClick = (event) => {
-    if (rootEl.value && !rootEl.value.contains(event.target)) {
-      isOpen.value = false
-    }
-  }
-  
-  onMounted(() => document.addEventListener('click', handleOutsideClick))
-  onBeforeUnmount(() => document.removeEventListener('click', handleOutsideClick))
-  </script>
+})
+
+const emit = defineEmits(['update:modelValue'])
+</script>

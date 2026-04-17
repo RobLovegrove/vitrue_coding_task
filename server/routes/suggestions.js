@@ -4,7 +4,7 @@ const store = require('../data/store');
 
 const VALID_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', (req, res) => {
     try {
         const { status } = req.body;
 

@@ -40,7 +40,6 @@ describe('store.updateStatus', () => {
         expect(result).not.toBeNull()
         expect(result.status).toBe('completed')
         expect(result.dateCompleted).toBeDefined()
-        expect(result.dateCompleted).toBeDefined()
         expect(Number.isNaN(Date.parse(result.dateUpdated))).toBe(false)
     })
 
